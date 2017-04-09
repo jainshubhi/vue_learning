@@ -1,0 +1,58 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>Vue App</title>
+  <script src="https://unpkg.com/vue"></script>
+  <link rel="stylesheet" href="http://davidtkatz.com/public_css/vue.css"
+</head>
+<body>
+  <div id="app">
+    <!-- v-bind allows the type to be casted for the prop appropriately -->
+    <counter v-bind:add-num="17"></counter>
+  </div>
+  <script>
+    // Two essential properties of a Vue component: models & computed properties
+    // models: allow users to update state in the Vue component with input field, etc.
+    // no new keyword!
+    var counter = Vue.component('counter', {
+      // backticks allow us to create this template on more than one line
+      template: `
+        <div>
+          <div>Count: {{this.count}}</div>
+          <button class="vue-btn" name="Counter" type="button" @click="increment">Increment by {{this.addNum}}</button>
+        </div>
+      `,
+      // data in components must be a function, compared to regulary Vue
+      // instance data object. Making data a function gives it a specific "this"
+      // call, giving this local Vue component a local "this" state.
+      data () {
+        return {
+          count: 0
+        }
+      },
+      methods: {
+        increment () {
+          this.count += this.addNum
+        }
+      },
+      // parents can give components some data through props
+      // props can go in the component declaration
+      props: {
+        // prop has to be camel case here, but is spaced by dashes in the html
+        addNum: {
+          type: Number,
+          default: 1
+        }
+      }
+    })
+
+    var app = new Vue({
+      el: '#app',
+      components: {
+        // ES6 syntax allows us to simply say counter instead of `"counter": counter`
+        counter
+      }
+    })
+  </script>
+</body>
+</html>

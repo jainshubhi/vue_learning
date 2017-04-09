@@ -1,0 +1,47 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>Vue App</title>
+  <script src="https://unpkg.com/vue"></script>
+  <link rel="stylesheet" href="http://davidtkatz.com/public_css/vue.css"
+</head>
+<body>
+  <div id="app">
+    <div class="">
+      Count: {{count}}!
+    </div>
+    <button @click="increment" class="vue-btn" type="button" name="button">Increment</button>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        count: 0
+      },
+      methods: {
+        // alertTime() {
+        //   alert(`The time is: ${Date.now().toLocaleString()}`)
+        // }
+        increment () {
+          this.count++
+        }
+      },
+      // // This lifecycle hook runs when the actual component is created! The
+      // // "Hello World" text doesn't show up until the alert runs first.
+      // created () {
+      //   this.alertTime()
+      // },
+      // // This lifecycle hook runs when the component is actually attached to the
+      // // DOM.
+      // mounted () {
+      //   this.alertTime()
+      // },
+      // This fires each time any piece of our component ON THE DOM is changed
+      // or updated
+      updated() {
+        console.log('this.count', this.count)
+      }
+    })
+  </script>
+</body>
+</html>
